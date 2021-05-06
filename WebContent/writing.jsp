@@ -3,7 +3,7 @@
 <jsp:include page="head.jsp" flush="false" />
 <div class="writing_container">
 	<div class="writing_box">
-		<form action="writingAction.jsp" method="post">
+		<form action="BorderServlet" method="post">
 			<div class="title_box">
 				<input type="text" name="title" placeholder="제목">
 			</div>

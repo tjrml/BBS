@@ -57,4 +57,21 @@ public class BorderDAO {
 		Timestamp time = new Timestamp(System.currentTimeMillis());
 		System.out.println(time);
 	}
+	
+	public List<Border> borderView(Border border) throws SQLException {
+		List<Border> list = new ArrayList<Border>();
+		String query = "SELECT * FROM border WHERE id = ?";
+		try (Connection conn = getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query);) {
+				pstmt.setInt(1, border.getIdx());
+				ResultSet rs = pstmt.executeQuery();
+				while (rs.next()) {
+				rs.getString("title");
+				rs.getString("writer");
+				list.add(new Border());
+				}
+			}
+		return list;
+	}
+	
 }
