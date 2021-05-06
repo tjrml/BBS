@@ -19,14 +19,12 @@ public class BorderDAO {
 		}
 		return DriverManager.getConnection("jdbc:mysql://localhost:3306/member", "root", "root");
 	}
-	
+
 	// 글쓰기
 	public int writing(Border border) throws SQLException {
 		int result = 0;
-		String query = "INSERT INTO border(title, writer, contents, date)" +
-						"VALUE (?, ?, ?, ?)";
-		try(Connection conn = getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(query);) {
+		String query = "INSERT INTO border(title, writer, contents, date)" + "VALUE (?, ?, ?, ?)";
+		try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(query);) {
 			pstmt.setString(1, border.getTitle());
 			pstmt.setString(2, border.getWriter());
 			pstmt.setString(3, border.getContent());
@@ -35,43 +33,36 @@ public class BorderDAO {
 		}
 		return result;
 	}
-	
+
+	// 게시판 화면 출력
 	public List<Border> borderPrint() throws SQLException {
 		List<Border> list = new ArrayList<Border>();
 		String query = "SELECT * FROM border LIMIT 10";
-		try (Connection conn = getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(query);) {
+		try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(query);) {
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-			int idx = rs.getInt("idx");
-			String title = rs.getString("title");
-			String writer = rs.getString("writer");
-			Timestamp time = rs.getTimestamp("date");
-			time.toLocalDateTime();
-			list.add(new Border(idx, title, writer, time));
+				int idx = rs.getInt("idx");
+				String title = rs.getString("title");
+				String writer = rs.getString("writer");
+				Timestamp time = rs.getTimestamp("date");
+				time.toLocalDateTime();
+				list.add(new Border(idx, title, writer, time));
 			}
 		}
 		return list;
 	}
-	public static void main(String[] args) {
-		Timestamp time = new Timestamp(System.currentTimeMillis());
-		System.out.println(time);
-	}
-	
-	public List<Border> borderView(Border border) throws SQLException {
-		List<Border> list = new ArrayList<Border>();
-		String query = "SELECT * FROM border WHERE id = ?";
+
+	// 삭제
+	public int delete(int idx) {
+		String query = "DELETE FROM border WHERE idx = ?";
 		try (Connection conn = getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(query);) {
-				pstmt.setInt(1, border.getIdx());
-				ResultSet rs = pstmt.executeQuery();
-				while (rs.next()) {
-				rs.getString("title");
-				rs.getString("writer");
-				list.add(new Border());
-				}
-			}
-		return list;
+			PreparedStatement pstmt = conn.prepareStatement(query);) {
+			pstmt.setInt(1, idx);
+			int result = pstmt.executeUpdate();
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return -1; // DB오류
 	}
-	
 }

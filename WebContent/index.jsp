@@ -41,9 +41,9 @@
 			%>
 			<tr>
 				<td><%=i.getIdx()%></td>
-				<td onclick="location.href='view.jsp'"><%=i.getTitle()%></td>
+				<td onclick="location.href='view.jsp?idx=<%= i.getIdx() %>&writer=<%= i.getWriter()%>'"><%=i.getTitle()%></td> <!-- 수정 삭제할때 쓸 idx, writer를 get으로 넘겨준다 -->
 				<td><%=i.getWriter()%></td>
-				<td><%=i.getTime().toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))%></td>
+				<td><%=i.getTime().toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))%></td> <!-- timestamp 패턴포맷 -->
 			</tr>
 			<%
 				}
