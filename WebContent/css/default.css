@@ -74,7 +74,7 @@ form > p {margin:5px 0;}
 .border_head {height:2.1rem;margin-top:2.4rem;border-top:2px solid #000;border-bottom:1px solid #ccc;text-align:center;}
 .border_main td {text-align:center;border-bottom:1px solid #ccc;height:2.1rem}
 .border_main td:nth-child(2) {cursor:pointer;}
-.btn {width:5rem;height:35px;border:1px solid #fff;background:#000;color:#fff;line-height:35px;text-align:center;margin-top:10px;float:right;cursor:pointer;}
+.btn {width:5rem;height:35px;background:#000;color:#fff;line-height:35px;text-align:center;margin-top:10px;float:right;cursor:pointer;border-radius:5px;}
 
 /* writing */
 .writing_container {width:88%;margin:0 auto}
@@ -82,7 +82,8 @@ form > p {margin:5px 0;}
 .writing_box textarea {width:93%;height:28.7rem;resize:none;position:absolute;top:3.9rem;right:3.2%}
 .title_box input{width:93%;position:absolute;top:10px;right:3.2%}
 .writing_box .btn {position:absolute;bottom:10px;right:3.2%}
+
 /* view */
-.view_box {height:33.4rem;border:1px solid #ccc;margin-top:5rem;position:relative;background:#ccc}
-.view_title {width:93%;position:absolute;top:10px;right:3.2%;height:40px;margin:0 auto;background:#fff;border-radius:5px}
-.view_content {width:93%;height:28.7rem;position:absolute;top:3.9rem;right:3.2%;margin:0 auto;background:#fff;border-radius:5px}
+.view_box {width:85%;height:40rem;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#ccc}
+.view_writer {width:70px;height:25px;background:#fff;}
+.view_btn {margin:0 5px;}
