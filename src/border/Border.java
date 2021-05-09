@@ -8,15 +8,16 @@ public class Border {
 	private String content;
 	private String writer;
 	private Timestamp time;
+	private String date;
 
 	public Border() {
 	}
 
-	public Border(int idx, String title, String writer, Timestamp time) {
+	public Border(int idx, String title, String writer, String date) {
 		this.idx = idx;
 		this.title = title;
 		this.writer = writer;
-		this.time = time;
+		this.date = date;
 
 	}
 
@@ -65,6 +66,14 @@ public class Border {
 
 	public void setTime(Timestamp time) {
 		this.time = time;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	}
 
 	@Override
