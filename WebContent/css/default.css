@@ -33,6 +33,7 @@ input[type=url],
 input[type=number],
 input[type=date],textarea {width:100%; height:40px; font-size:13px; color:#373737; border:1px solid #ccc; background:#fff; text-indent:15px; border-radius: 5px; transition: all 0.5s; vertical-align:middle;}
 input::-webkit-input-placeholder{color:#b5b5b5; font-size:12px; line-height:100%;}
+textarea::-webkit-input-placeholder{color:#b5b5b5}
 textarea { padding:5px 0;}
 select:focus,
 textarea:focus,
@@ -54,6 +55,12 @@ textarea[disabled]{padding:11px; font-size:16px; color:#666; font-weight:normal;
 .clear {clear:both;}
 .clear:after { content:""; display:block; clear:both;}
 
+/* index */
+.gnb {width:100%;background:#000;height:4rem;position:fixed;font-size:1.1rem;color:#fff;margin:0 auto}
+.gnb li{float:left;width:auto;height:4rem;line-height:4rem;margin:0 5px;cursor:pointer;}
+.login_box {text-align:right;font-size:.9rem;height:4rem;line-height:4rem;}
+.login {cursor:pointer;maring-right:1rem}
+.logout {cursor:pointer;}
 /* 로그인 */
 #loginbtn {width:300px;height:42px;color:#fff;background:#000;font-size:.8rem;border-radius:5px;cursor:pointer;}
 .title {text-align:center;font-size:2rem;padding-top:150px}
@@ -68,22 +75,28 @@ form > p {margin:5px 0;}
 .joinbtn:last-child{background:#FF2424}
 
 /* 게시판 */
-.border_container {width:88%;margin:0 auto}
-.border_title {font-size:1.7rem;padding-top:6rem;font-weight:bold;}
-.border {height:34rem}
+.border_container {width:88%;margin:0 auto;}
+.border_title {font-size:1.7rem;font-weight:bold;}
+.border_box {width:60rem;height:40rem;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);}
 .border_head {height:2.1rem;margin-top:2.4rem;border-top:2px solid #000;border-bottom:1px solid #ccc;text-align:center;}
 .border_main td {text-align:center;border-bottom:1px solid #ccc;height:2.1rem}
 .border_main td:nth-child(2) {cursor:pointer;}
 .btn {width:5rem;height:35px;background:#000;color:#fff;line-height:35px;text-align:center;margin-top:10px;float:right;cursor:pointer;border-radius:5px;}
+.border_btn {position:absolute;right:0;bottom:-2.6rem}
 
 /* writing */
 .writing_container {width:88%;margin:0 auto}
-.writing_box {height:36.8rem;border:1px solid #ccc;margin-top:5rem;position:relative;background:#ccc}
-.writing_box textarea {width:93%;height:28.7rem;resize:none;position:absolute;top:3.9rem;right:3.2%}
-.title_box input{width:93%;position:absolute;top:10px;right:3.2%}
-.writing_box .btn {position:absolute;bottom:10px;right:3.2%}
+.writing_box {background:#f5f5f5}
+.writing_box textarea {width:93%;height:28.7rem;resize:none;position:absolute;top:5.8rem;right:3.2%}
+.title_box input{width:93%;position:absolute;top:30px;right:3.2%}
+.writing_box .btn {position:absolute;bottom:25px;right:3.2%}
 
 /* view */
-.view_box {width:85%;height:40rem;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#ccc}
+.view_box {background:#f5f5f5}
 .view_writer {width:70px;height:25px;background:#fff;}
-.view_btn {margin:0 5px;}
+.view_table {width:85%;margin:0 auto;font-size:.9rem;margin-top:2rem}
+.view_table tr td:nth-child(1) {height:23px;text-align:left;text-indent:15px}
+.view_table tr td:nth-child(2) {text-align:right;}
+.view_content {width:85%;margin:0 auto;margin-top:1rem;height:29rem;text-indent:15px;line-height:3;background:#fff;font-size:.9rem;border-radius:10px;}
+.view_btn {margin:0 0 0 5px;}
+.view_btnbox {width:85%;margin:0 auto;margin-top:20px;}

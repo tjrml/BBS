@@ -33,11 +33,13 @@ public class Login extends HttpServlet {
 				out.println("<script>");
 				out.println("location.href='index.jsp'"); 
 				out.println("</script>");
+				out.flush();
 			} else {
 				out.println("<script>");
 				out.println("alert('아이디 또는 비밀번호가 잘못되었습니다.')");
 				out.println("location.href='login.jsp'");
 				out.println("</script>");
+				out.flush();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

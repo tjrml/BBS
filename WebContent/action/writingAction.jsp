@@ -17,11 +17,13 @@
 		pw.println("<script>");
 		pw.println("location.href = 'index.jsp';");
 		pw.println("</script>");
+		pw.flush();
 	} else {
 		pw.println("<script>");
 		pw.println("alert('로그인을 해주세요')");
 		pw.println("location.href = 'login.jsp';");
 		pw.println("</script>");
+		pw.flush();
 	}
 	
 %>
