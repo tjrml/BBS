@@ -21,6 +21,7 @@
 %>
 <jsp:include page="head.jsp" flush="false" />
 <title>자유게시판</title>
+<jsp:include page="gnb.jsp" flush="false"/>
 <div class="border_container">
 	<div class="border_box">
 		<div class="border_title">자유게시판</div>
@@ -66,7 +67,7 @@
 			%>
 		</table>
 		<div class="page_box">
-			<div class=page onclick="location.href='bbs.jsp?page='">이전</div>
+			<div class=page onclick="location.href='bbs.jsp?page='">이전</div>\
 			<% 
 				for(int pageNumber = 1; pageNumber <= lastPage; pageNumber++) {
 					if (pageNumber <= 10) {

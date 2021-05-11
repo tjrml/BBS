@@ -20,7 +20,7 @@ public class BorderDAO {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		return DriverManager.getConnection("jdbc:mysql://localhost:3306/member", "root", "root");
+		return DriverManager.getConnection("jdbc:mysql://localhost:3306/border", "root", "root");
 	}
 
 	// 글쓰기

@@ -16,7 +16,7 @@
 		dao.delete(Integer.valueOf(idx));
 		out.println("<script>");
 		out.println("alert('삭제되었습니다.')");
-		out.println("location.href='index.jsp'");
+		out.println("location.href='/index.jsp'");
 		out.println("</script>");
 	} else {
 		out.println("<script>");

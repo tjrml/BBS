@@ -20,5 +20,5 @@
 %>
 <script>
 	alert("가입완료")
-	location.href = 'login.jsp';
+	location.href = '/login.jsp';
 </script>

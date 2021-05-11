@@ -26,7 +26,7 @@
 		<div class="view_btnbox">
 			<div class="btn view_btn" onclick="location.href='index.jsp'" >목록</div>
 			<div class="btn view_btn" onclick="location.href='update.jsp?title=<%= border.getTitle() %>&content=<%= border.getContent() %>&idx=<%= idx %>&writer=<%= border.getWriter() %>'">수정</div>
-			<div class="btn view_btn" onclick="location.href='deleteAction.jsp?idx=<%= idx %>&writer=<%= border.getWriter() %>'">삭제</div>	
+			<div class="btn view_btn" onclick="location.href='/action/deleteAction.jsp?idx=<%= idx %>&writer=<%= border.getWriter() %>'">삭제</div>	
 			<div class="clear"></div>
 		</div>
 		<% } %>
