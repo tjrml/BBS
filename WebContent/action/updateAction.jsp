@@ -1,4 +1,4 @@
-<%@page import="border.BorderDAO"%>
+<%@page import="board.BoardDAO"%>
 <%@page import="user.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -7,7 +7,7 @@
 	System.out.println(idx);
 	String title = request.getParameter("title");
 	String contents = request.getParameter("contents");
-	BorderDAO dao = new BorderDAO();
+	BoardDAO dao = new BoardDAO();
 	if (title.length() == 0 || contents.length() == 0) {
 		out.println("<script>");
 		out.println("alert('제목 또는 내용을 입력해주세요')");

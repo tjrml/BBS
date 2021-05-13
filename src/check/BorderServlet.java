@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import border.Border;
-import border.BorderDAO;
+import board.Board;
+import board.BoardDAO;
 
 @WebServlet("/BorderServlet")
 public class BorderServlet extends HttpServlet {
@@ -36,7 +36,7 @@ public class BorderServlet extends HttpServlet {
 		String content = request.getParameter("contents");
 		String writer = (String) session.getAttribute("id");
 		Timestamp time = new Timestamp(System.currentTimeMillis());
-		BorderDAO dao = new BorderDAO();
+		BoardDAO dao = new BoardDAO();
 		if (title.length() == 0 || content.length() == 0) {
 			out.println("<script>");
 			out.println("alert('제목 또는 내용을 입력해주세요')");
@@ -44,7 +44,7 @@ public class BorderServlet extends HttpServlet {
 			out.println("</script>");
 		} else {
 			try {
-				dao.writing(new Border(title, content, writer, time));
+				dao.writing(new Board(title, content, writer, time));
 				out.println("<script>");
 				out.println("location.href = 'index.jsp';");
 				out.println("</script>");
@@ -66,7 +66,7 @@ public class BorderServlet extends HttpServlet {
 			throws ServletException, IOException {
 		int idx = Integer.valueOf(request.getParameter("idx"));
 		String writer = request.getParameter("writer");
-		BorderDAO dao = new BorderDAO();
+		BoardDAO dao = new BoardDAO();
 		HttpSession session = request.getSession(true);
 		String id = (String) session.getAttribute("id");
 		PrintWriter out = response.getWriter();
