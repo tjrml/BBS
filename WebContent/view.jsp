@@ -1,19 +1,21 @@
 <%@page import="java.util.List"%>
-<%@page import="border.Border"%>
-<%@page import="border.BorderDAO"%>
+<%@page import="board.Board"%>
+<%@page import="board.BoardDAO"%>
 <%@page import="java.time.format.DateTimeFormatter" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	int idx = Integer.valueOf(request.getParameter("idx"));
-	BorderDAO dao = new BorderDAO();
-	List<Border> list = dao.seleteOne(idx);
+	BoardDAO dao = new BoardDAO();
+	List<Board> list = dao.seleteOne(idx);
 %>
 <jsp:include page="head.jsp" flush="false" />
 <div class="writing_container">
 	<div class="border_box view_box">
 		<table class="view_table">
-			<% for (Border border : list) {	%>
+			<%
+				for (Board border : list) {
+			%>
 			<tr>
 				<td colspan="2">제목 : <%= border.getTitle() %></td>
 			</tr>

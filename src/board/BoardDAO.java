@@ -1,4 +1,4 @@
-package border;
+package board;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,9 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.jdt.internal.compiler.batch.Main;
-
-public class BorderDAO {
+public class BoardDAO {
 	// DB연결
 	public Connection getConnection() throws SQLException {
 		try {
@@ -20,11 +18,11 @@ public class BorderDAO {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		return DriverManager.getConnection("jdbc:mysql://localhost:3306/border", "root", "root");
+		return DriverManager.getConnection("jdbc:mysql://localhost:3306/member", "root", "root");
 	}
 
 	// 글쓰기
-	public int writing(Border border) throws SQLException {
+	public int writing(Board border) throws SQLException {
 		int result = 0;
 		String query = "INSERT INTO border(title, writer, contents, date)" + "VALUE (?, ?, ?, ?)";
 		try (Connection conn = getConnection();
@@ -70,8 +68,8 @@ public class BorderDAO {
 	}
 
 	// 1개만 검색
-	public List<Border> seleteOne(int idx) throws SQLException {
-		List<Border> list = new ArrayList<Border>();
+	public List<Board> seleteOne(int idx) throws SQLException {
+		List<Board> list = new ArrayList<Board>();
 		String query = "SELECT * FROM border WHERE idx = ?";
 		try (Connection conn = getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(query);) {
@@ -82,7 +80,7 @@ public class BorderDAO {
 				String writer = rs.getString("writer");
 				String content = rs.getString("contents");
 				Timestamp date = rs.getTimestamp("date");
-				list.add(new Border(title, content, writer, date));
+				list.add(new Board(title, content, writer, date));
 			}
 			return list;
 		}
@@ -106,12 +104,13 @@ public class BorderDAO {
 	
 
 	// 게시판 화면 출력 
-	public List<Border> borderPrint(int index) throws SQLException {
-		List<Border> list = new ArrayList<Border>();
-		String query = "SELECT * FROM border ORDER BY idx DESC LIMIT ?, 10";
+	public List<Board> boardPrint(int index, int numPerPage) throws SQLException {
+		List<Board> list = new ArrayList<Board>();
+		String query = "SELECT * FROM border ORDER BY idx DESC LIMIT ?, ?";
 		try (Connection conn = getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(query);) {
 			pstmt.setInt(1, index);
+			pstmt.setInt(2, numPerPage);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				int idx = rs.getInt("idx");
@@ -119,7 +118,7 @@ public class BorderDAO {
 				String writer = rs.getString("writer");
 				Timestamp time = rs.getTimestamp("date");
 				String date = time.toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-				list.add(new Border(idx, title, writer, date));
+				list.add(new Board(idx, title, writer, date));
 			}
 			return list;
 		}

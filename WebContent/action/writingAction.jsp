@@ -1,7 +1,7 @@
 <%@page import="java.sql.Timestamp"%>
 <%@page import="java.io.PrintWriter"%>
-<%@page import="border.Border"%>
-<%@page import="border.BorderDAO"%>
+<%@page import="board.Board"%>
+<%@page import="board.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
@@ -11,9 +11,9 @@
 	String content = request.getParameter("contents");
 	String writer = (String) session.getAttribute("id");
 	Timestamp time = new Timestamp(System.currentTimeMillis());
-	BorderDAO dao = new BorderDAO();
+	BoardDAO dao = new BoardDAO();
 	if (session.getAttribute("id") != null) {
-		dao.writing(new Border(title, content, writer, time));
+		dao.writing(new Board(title, content, writer, time));
 		pw.println("<script>");
 		pw.println("location.href = 'index.jsp';");
 		pw.println("</script>");
@@ -25,7 +25,6 @@
 		pw.println("</script>");
 		pw.flush();
 	}
-	
 %>
 
 	

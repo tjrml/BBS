@@ -1,23 +1,29 @@
+<%@page import="board.Paging"%>
 <%@page import="user.MemberDAO"%>
 <%@page import="java.util.List"%>
-<%@page import="border.Border"%>
-<%@page import="border.BorderDAO"%>
+<%@page import="board.Board"%>
+<%@page import="board.BoardDAO"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<% 	
+<%
 	// 페이징 처리
-	BorderDAO dao = new BorderDAO();
-	int total = dao.totalCount(); // DB 전체 게시물 개수
-	// 19 / 10 -> 1.9 -> ceil(1.9)올림 -> 2.0  
-	int lastPage = (int)Math.ceil((double)total / 10); // 전체페이지 수 구하기
-	String pageStr = request.getParameter("page");
-	int pageNum = 1;
-	if (pageStr != null) {
-		pageNum = Integer.parseInt(pageStr);
-	}
-	int index = (pageNum - 1) * 10; // (1 -> 0) (2 -> 10) (3 -> 20) 1페이지일때 보여지는 인덱스
+	BoardDAO dao = new BoardDAO();
+	int totalCount = dao.totalCount();
+	int paramPage = request.getParameter("page") == null ? 1 : Integer.parseInt(request.getParameter("page"));
 	
+	Paging paging = new Paging(); //get방식의 parameter값으로 반은 page변수, 현재 페이지 번호
+	paging.setPageNo(paramPage); // 한페이지에 불러낼 게시물의 개수 지정
+	paging.setPageSize(10);
+	paging.setTotalCount(totalCount);
+	
+	paramPage = (paramPage - 1) * 10; // (1 -> 0) (2 -> 10) (3 -> 20) 페이지당 불러낼 게시물 수
+	List<Board> list = dao.boardPrint(paramPage, paging.getPageSize());
+	int startPage = paging.getStartPageNo();
+	int endPage = paging.getEndPageNo();
+	int prevPage = paging.getPrevPageNo();
+	int nextPage = paging.getNextPageNo();
+	int totalPage = (int)Math.ceil((double)totalCount / paging.getPageSize());
 %>
 <jsp:include page="head.jsp" flush="false" />
 <title>자유게시판</title>
@@ -50,16 +56,15 @@
 				<col width="10%">
 			</colgroup>
 			<%
-				List<Border> list = dao.borderPrint(index);
-				for (Border i : list) {
+				for (Board board : list) {
 			%>
 			<tr>
-				<td><%=i.getIdx()%></td>
+				<td><%= board.getIdx()%></td>
 				<!-- 수정 삭제할때 쓸 idx, writer를 get으로 넘겨준다 -->
-				<td	onclick="location.href='view.jsp?idx=<%=i.getIdx()%>&write=<%=i.getWriter()%>'"><%=i.getTitle()%></td>
-				<td><%=i.getWriter()%></td>
+				<td	onclick="location.href='view.jsp?idx=<%= board.getIdx()%>&write=<%= board.getWriter() %>'"><%= board.getTitle() %></td>
+				<td><%= board.getWriter()%></td>
 				<!-- timestamp 패턴포맷 -->
-				<td><%=i.getDate()%></td>
+				<td><%= board.getDate()%></td>
 				<td></td>
 			</tr>
 			<%
@@ -67,18 +72,28 @@
 			%>
 		</table>
 		<div class="page_box">
-			<div class=page onclick="location.href='bbs.jsp?page='">이전</div>\
 			<% 
-				for(int pageNumber = 1; pageNumber <= lastPage; pageNumber++) {
-					if (pageNumber <= 10) {
+				if (startPage > 10) { 
 			%>
-			<div class=page onclick="location.href='bbs.jsp?page=<%= pageNumber %>'">[<%= pageNumber %>]</div>
-			<% 
-					}
+			<div class=page onclick="location.href='bbs.jsp?page=<%= startPage - 10 %>'">이전</div>
+			<% } else {	%>
+			<div class=page style="cursor:default;">이전</div>
+			<%		
 				}
-			%>
-			<div class=page onclick="location.href='bbs.jsp?page='">다음</div>
 			
+				for (; startPage <= endPage; startPage++) {
+					if (startPage <= endPage) {
+			%>
+			<div class=page onclick="location.href='bbs.jsp?page=<%= startPage %>'">[<%= startPage %>]</div>
+			<% 
+						}
+					}
+			%>
+			<% if (endPage < totalPage) { %>
+			<div class=page onclick="location.href='bbs.jsp?page=<%= endPage + 1 %>'">다음</div>
+			<% } else { %>
+			<div class=page style="cursor:default;">다음</div>
+			<% } %>
 		</div>
 		<div class="btn" onclick="location.href='writing.jsp'">글쓰기</div>
 		<div class="clear"></div>

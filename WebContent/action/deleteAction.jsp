@@ -1,11 +1,11 @@
-<%@page import="border.BorderDAO"%>
+<%@page import="board.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
 	String idx = request.getParameter("idx");
 	String writer = request.getParameter("writer");
-	BorderDAO dao = new BorderDAO();
+	BoardDAO dao = new BoardDAO();
 	String id = (String) session.getAttribute("id");
 	if (session.getAttribute("id") == null) {
 		out.println("<script>");

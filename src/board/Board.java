@@ -1,8 +1,8 @@
-package border;
+package board;
 
 import java.sql.Timestamp;
 
-public class Border {
+public class Board {
 	private int idx;
 	private String title;
 	private String content;
@@ -10,10 +10,10 @@ public class Border {
 	private Timestamp time;
 	private String date;
 
-	public Border() {
+	public Board() {
 	}
 
-	public Border(int idx, String title, String writer, String date) {
+	public Board(int idx, String title, String writer, String date) {
 		this.idx = idx;
 		this.title = title;
 		this.writer = writer;
@@ -21,7 +21,7 @@ public class Border {
 
 	}
 
-	public Border(String title, String content, String writer, Timestamp time) {
+	public Board(String title, String content, String writer, Timestamp time) {
 		this.title = title;
 		this.content = content;
 		this.writer = writer;
@@ -102,7 +102,7 @@ public class Border {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Border other = (Border) obj;
+		Board other = (Board) obj;
 		if (content == null) {
 			if (other.content != null)
 				return false;
