@@ -59,8 +59,10 @@ textarea[disabled]{padding:11px; font-size:16px; color:#666; font-weight:normal;
 .gnb {width:100%;background:#000;height:4rem;position:fixed;font-size:1.1rem;color:#fff;margin:0 auto}
 .gnb li{float:left;width:auto;height:4rem;line-height:4rem;margin:0 5px;cursor:pointer;}
 .login_box {text-align:right;font-size:.9rem;height:4rem;line-height:4rem;}
-.login {cursor:pointer;maring-right:1rem}
-.logout {cursor:pointer;position:absolute;top:19px;right:0}
+.login {cursor:pointer;maring-right:1rem;font-size:1.5rem;margin-right:2rem;}
+.logout {position:absolute;top:-13px;right:25px;}
+.icon {top:13px;right:35px;font-size:1.4rem;cursor:pointer}
+.icon span {font-size:.9rem;margin-left:5px}
 /* 로그인 */
 #loginbtn {width:300px;height:42px;color:#fff;background:#000;font-size:.8rem;border-radius:5px;cursor:pointer;}
 .title {text-align:center;font-size:2rem;padding-top:150px}

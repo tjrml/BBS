@@ -121,6 +121,4 @@ public class Paging {
 		this.totalCount = totalCount;
 		this.makePaging();
 	}
-	
-	
 }

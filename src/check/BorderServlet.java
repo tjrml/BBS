@@ -40,14 +40,16 @@ public class BorderServlet extends HttpServlet {
 		if (title.length() == 0 || content.length() == 0) {
 			out.println("<script>");
 			out.println("alert('제목 또는 내용을 입력해주세요')");
-			out.println("location.href = 'writing.jsp';");
+			out.println("location.href = '/writing.jsp';");
 			out.println("</script>");
+			out.flush();
 		} else {
 			try {
 				dao.writing(new Board(title, content, writer, time));
 				out.println("<script>");
-				out.println("location.href = 'index.jsp';");
+				out.println("location.href = '/index.jsp';");
 				out.println("</script>");
+				out.flush();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -76,11 +78,13 @@ public class BorderServlet extends HttpServlet {
 			out.println("alert('삭제되었습니다.')");
 			out.println("location.href='index.jsp'");
 			out.println("</script>");
+			out.flush();
 		} else {
 			out.println("<script>");
 			out.println("alert('작성자가 아닙니다.')");
 			out.println("history.back()");
 			out.println("</script>");
+			out.flush();
 		}
 	}
 }

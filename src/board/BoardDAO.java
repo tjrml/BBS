@@ -23,7 +23,7 @@ public class BoardDAO {
 
 	// 글쓰기
 	public int writing(Board border) throws SQLException {
-		int result = 0;
+		int result = -1;
 		String query = "INSERT INTO border(title, writer, contents, date)" + "VALUE (?, ?, ?, ?)";
 		try (Connection conn = getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(query);) {

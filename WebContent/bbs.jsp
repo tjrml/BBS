@@ -17,8 +17,8 @@
 	paging.setPageSize(10);
 	paging.setTotalCount(totalCount);
 	
-	paramPage = (paramPage - 1) * 10; // (1 -> 0) (2 -> 10) (3 -> 20) 페이지당 불러낼 게시물 수
-	List<Board> list = dao.boardPrint(paramPage, paging.getPageSize());
+	int numPerPage = (paramPage - 1) * 10; // (1 -> 0) (2 -> 10) (3 -> 20) 페이지당 불러낼 게시물 수
+	List<Board> list = dao.boardPrint(numPerPage, paging.getPageSize());
 	int startPage = paging.getStartPageNo();
 	int endPage = paging.getEndPageNo();
 	int prevPage = paging.getPrevPageNo();
@@ -75,7 +75,7 @@
 			<% 
 				if (startPage > 10) { 
 			%>
-			<div class=page onclick="location.href='bbs.jsp?page=<%= startPage - 10 %>'">이전</div>
+			<div class=page onclick="location.href='bbs.jsp?page=<%= startPage - 10 %>'">이전</div> 
 			<% } else {	%>
 			<div class=page style="cursor:default;">이전</div>
 			<%		
@@ -83,9 +83,13 @@
 			
 				for (; startPage <= endPage; startPage++) {
 					if (startPage <= endPage) {
+						if (paramPage == startPage ) { 
 			%>
+			<div class=page onclick="location.href='bbs.jsp?page=<%= startPage %>'" style="color:red">[<%= startPage %>]</div>
+			<% } else { %>
 			<div class=page onclick="location.href='bbs.jsp?page=<%= startPage %>'">[<%= startPage %>]</div>
-			<% 
+			<%	
+							}
 						}
 					}
 			%>
@@ -99,4 +103,5 @@
 		<div class="clear"></div>
 	</div>
 </div>
+
 <jsp:include page="footer.jsp" flush="false" />
