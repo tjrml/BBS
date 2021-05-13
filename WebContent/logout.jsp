@@ -10,7 +10,9 @@
 	<%
 		session.invalidate();
 	%>
-	<p>로그아웃 되었습니다.</p>
-	<a href="login.jsp">처음으로</a>
+	<script>
+	alert("로그아웃 되었습니다");
+	location.href='/index.jsp';
+	</script>
 </body>
 </html>

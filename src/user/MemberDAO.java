@@ -14,14 +14,15 @@ public class MemberDAO {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		return DriverManager.getConnection("jdbc:mysql://localhost:3306/border", "root", "root");
+		return DriverManager.getConnection("jdbc:mysql://localhost:3306/member", "root", "root");
 	}
 	
 	// 회원가입
 	public int join(User user) throws SQLException {
 		int result = 0;
 		String query = "INSERT INTO user(id, password, name, age)" + "VALUE(?, ?, ?, ?)";
-		try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(query)) {
+		try (Connection conn = getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(query)) {
 			pstmt.setString(1, user.getId());
 			pstmt.setString(2, user.getPassword());
 			pstmt.setString(3, user.getName());

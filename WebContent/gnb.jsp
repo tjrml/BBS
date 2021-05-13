@@ -10,10 +10,10 @@
 		</ul>
 		<div class="login_box">
 			<% if (session.getAttribute("id") != null) { %>
-				<div><%=session.getAttribute("id")%>님 환영합니다</div>
-				<div class="logout" onclick="location.href='logout.jsp'">로그아웃</div>
+				<div class="logout "><%=session.getAttribute("id")%>님 환영합니다</div>
+				<div class="logout icon" onclick="location.href='logout.jsp'"><i class="fas fa-sign-out-alt"></i><span>로그아웃</span></div>
 			<% } else { %>
-				<span class="login" onclick="location.href='login.jsp'">로그인</span>
+				<span class="login" onclick="location.href='login.jsp'"><i class="fas fa-user"></i></span>
 			<% } %>
 		</div>
 		<div class="clear"></div>
