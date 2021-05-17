@@ -23,7 +23,7 @@
 	int endPage = paging.getEndPageNo();
 	int prevPage = paging.getPrevPageNo();
 	int nextPage = paging.getNextPageNo();
-	int totalPage = (int)Math.ceil((double)totalCount / paging.getPageSize());
+	int totalPage = (int)Math.ceil((double)totalCount / paging.getPageSize()); // 전체페이지
 %>
 <jsp:include page="head.jsp" flush="false" />
 <title>자유게시판</title>
@@ -80,7 +80,6 @@
 			<div class=page style="cursor:default;">이전</div>
 			<%		
 				}
-			
 				for (; startPage <= endPage; startPage++) {
 					if (startPage <= endPage) {
 						if (paramPage == startPage ) { 
@@ -103,5 +102,4 @@
 		<div class="clear"></div>
 	</div>
 </div>
-
 <jsp:include page="footer.jsp" flush="false" />
