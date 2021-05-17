@@ -55,18 +55,24 @@ textarea[disabled]{padding:11px; font-size:16px; color:#666; font-weight:normal;
 .clear {clear:both;}
 .clear:after { content:""; display:block; clear:both;}
 
+/* gnb */
+.gnb {width:100%;background:#1c1c26;height:65px;position:fixed;font-size:12px;color:#fff;margin:0 auto;z-index:9999}
+.loginbox {position:absolute;top:15px;left:17px;color:#9b9b9f;}
+.login_singup {padding:0 3px;cursor:pointer;}
+.gnb ul {float:right;font-weight:bold}
+.gnb li{float:left;width:auto;line-height:65px;margin:0 14px;cursor:pointer;}
+.login {cursor:pointer;maring-right:1rem;font-size:.9rem;margin-right:2rem;}
+.menu:hover {color:#5791f5}
+.login_singup:hover {text-decoration:underline;color:#fff;}
+
 /* index */
-.gnb {width:100%;background:#000;height:4rem;position:fixed;font-size:1.1rem;color:#fff;margin:0 auto}
-.gnb li{float:left;width:auto;height:4rem;line-height:4rem;margin:0 5px;cursor:pointer;}
-.login_box {text-align:right;font-size:.9rem;height:4rem;line-height:4rem;}
-.login {cursor:pointer;maring-right:1rem;font-size:1.5rem;margin-right:2rem;}
-.logout {position:absolute;top:-13px;right:25px;}
-.icon {top:13px;right:35px;font-size:1.4rem;cursor:pointer}
-.icon span {font-size:.9rem;margin-left:5px}
+.container {width:100%;height:100vh}
+.main_img {height:100vh;background-image:url("/img/man.jpg");background-position:center}
+.text {padding:180px 30px;font-size:24px;color:#000;text-align:right;}
 /* 로그인 */
-#loginbtn {width:300px;height:42px;color:#fff;background:#000;font-size:.8rem;border-radius:5px;cursor:pointer;}
-.title {text-align:center;font-size:2rem;padding-top:150px}
+.login_title {text-align:center;font-size:2rem;margin-top:150px}
 .formbox {width:300px;margin:0 auto;font-size:.8rem;padding-top:3rem}
+.loginbtn {width:300px;height:42px;color:#fff;background:#000;font-size:.8rem;border-radius:5px;cursor:pointer;}
 .formbox span {float:right;padding:5px 0;cursor:pointer;}
 form > p {margin:5px 0;}
 
@@ -77,7 +83,7 @@ form > p {margin:5px 0;}
 .joinbtn:last-child{background:#FF2424}
 
 /* 게시판 */
-.border_container {width:88%;margin:0 auto;}
+.border_container {width:88%;height:100vh;margin:0 auto;position:relative}
 .border_title {font-size:1.7rem;font-weight:bold;}
 .border_box {width:60rem;height:40rem;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);}
 .border_head {height:2.1rem;margin-top:2.4rem;border-top:2px solid #000;border-bottom:1px solid #ccc;text-align:center;}
