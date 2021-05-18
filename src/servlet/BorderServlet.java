@@ -1,9 +1,10 @@
-package check;
+package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +23,15 @@ public class BorderServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		int idx = Integer.valueOf(request.getParameter("idx"));
+		BoardDAO dao = BoardDAO.getInstance();
+		try {
+			Board board = dao.seleteOne(idx);
+			request.setAttribute("board", board);
+			request.getRequestDispatcher("/view.jsp").forward(request, response);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -36,7 +45,7 @@ public class BorderServlet extends HttpServlet {
 		String content = request.getParameter("contents");
 		String writer = (String) session.getAttribute("id");
 		Timestamp time = new Timestamp(System.currentTimeMillis());
-		BoardDAO dao = new BoardDAO();
+		BoardDAO dao = BoardDAO.getInstance();
 		if (title.length() == 0 || content.length() == 0) {
 			out.println("<script>");
 			out.println("alert('제목 또는 내용을 입력해주세요')");
@@ -66,25 +75,29 @@ public class BorderServlet extends HttpServlet {
 	@Override
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		int idx = Integer.valueOf(request.getParameter("idx"));
-		String writer = request.getParameter("writer");
-		BoardDAO dao = new BoardDAO();
 		HttpSession session = request.getSession(true);
+		String idx = request.getParameter("idx");
+		String writer = request.getParameter("writer");
+		BoardDAO dao = BoardDAO.getInstance();
 		String id = (String) session.getAttribute("id");
 		PrintWriter out = response.getWriter();
-		if (id.equals(writer)) {
-			dao.delete(idx);
+		if (session.getAttribute("id") == null) {
+			out.println("<script>");
+			out.println("alert('로그인 해주세요.')");
+			out.println("location.href = 'login.jsp';");
+			out.println("</script>");
+		} else if (id.equals(writer)) {
+			dao.delete(Integer.valueOf(idx));
 			out.println("<script>");
 			out.println("alert('삭제되었습니다.')");
-			out.println("location.href='index.jsp'");
+			out.println("location.href='/index.jsp'");
 			out.println("</script>");
-			out.flush();
 		} else {
 			out.println("<script>");
 			out.println("alert('작성자가 아닙니다.')");
 			out.println("history.back()");
 			out.println("</script>");
-			out.flush();
 		}
+		request.getRequestDispatcher("/view.jsp").forward(request, response);
 	}
 }

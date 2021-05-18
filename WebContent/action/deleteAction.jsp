@@ -5,7 +5,7 @@
 <%
 	String idx = request.getParameter("idx");
 	String writer = request.getParameter("writer");
-	BoardDAO dao = new BoardDAO();
+	BoardDAO dao = BoardDAO.getInstance();
 	String id = (String) session.getAttribute("id");
 	if (session.getAttribute("id") == null) {
 		out.println("<script>");

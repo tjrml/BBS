@@ -11,6 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BoardDAO {
+	private static BoardDAO instance = new BoardDAO();
+	private BoardDAO() {}
+	public static BoardDAO getInstance() {
+		return instance;
+	}
 	// DB연결
 	public Connection getConnection() throws SQLException {
 		try {
@@ -68,8 +73,7 @@ public class BoardDAO {
 	}
 
 	// 1개만 검색
-	public List<Board> seleteOne(int idx) throws SQLException {
-		List<Board> list = new ArrayList<Board>();
+	public Board seleteOne(int idx) throws SQLException {
 		String query = "SELECT * FROM border WHERE idx = ?";
 		try (Connection conn = getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(query);) {
@@ -80,10 +84,10 @@ public class BoardDAO {
 				String writer = rs.getString("writer");
 				String content = rs.getString("contents");
 				Timestamp date = rs.getTimestamp("date");
-				list.add(new Board(title, content, writer, date));
+				return new Board(title, content, writer, date);
 			}
-			return list;
 		}
+		return null;
 	}
 
 	// 게시물 총 개수
