@@ -7,7 +7,7 @@
 	System.out.println(idx);
 	String title = request.getParameter("title");
 	String contents = request.getParameter("contents");
-	BoardDAO dao = new BoardDAO();
+	BoardDAO dao = BoardDAO.getInstance();
 	if (title.length() == 0 || contents.length() == 0) {
 		out.println("<script>");
 		out.println("alert('제목 또는 내용을 입력해주세요')");

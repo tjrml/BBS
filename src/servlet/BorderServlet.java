@@ -28,6 +28,7 @@ public class BorderServlet extends HttpServlet {
 		try {
 			Board board = dao.seleteOne(idx);
 			request.setAttribute("board", board);
+			request.setAttribute("idx", idx);
 			request.getRequestDispatcher("/view.jsp").forward(request, response);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -56,7 +57,7 @@ public class BorderServlet extends HttpServlet {
 			try {
 				dao.writing(new Board(title, content, writer, time));
 				out.println("<script>");
-				out.println("location.href = '/index.jsp';");
+				out.println("location.href = '/BBS';");
 				out.println("</script>");
 				out.flush();
 			} catch (SQLException e) {
@@ -64,40 +65,5 @@ public class BorderServlet extends HttpServlet {
 			}
 		}
 
-	}
-
-	@Override
-	protected void doPut(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-	}
-
-	@Override
-	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		HttpSession session = request.getSession(true);
-		String idx = request.getParameter("idx");
-		String writer = request.getParameter("writer");
-		BoardDAO dao = BoardDAO.getInstance();
-		String id = (String) session.getAttribute("id");
-		PrintWriter out = response.getWriter();
-		if (session.getAttribute("id") == null) {
-			out.println("<script>");
-			out.println("alert('로그인 해주세요.')");
-			out.println("location.href = 'login.jsp';");
-			out.println("</script>");
-		} else if (id.equals(writer)) {
-			dao.delete(Integer.valueOf(idx));
-			out.println("<script>");
-			out.println("alert('삭제되었습니다.')");
-			out.println("location.href='/index.jsp'");
-			out.println("</script>");
-		} else {
-			out.println("<script>");
-			out.println("alert('작성자가 아닙니다.')");
-			out.println("history.back()");
-			out.println("</script>");
-		}
-		request.getRequestDispatcher("/view.jsp").forward(request, response);
 	}
 }
