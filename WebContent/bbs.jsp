@@ -37,7 +37,7 @@
 					<td>${ board.idx }</td>
 					<!-- 수정 삭제할때 쓸 idx, writer를 get으로 넘겨준다 -->
 					<td	onclick="location.href='BorderServlet?idx=${ board.idx }&write=${ board.writer }'">${ board.title }</td>
-					<td>${ board.title }</td>
+					<td>${ board.writer }</td>
 					<!-- timestamp 패턴포맷 -->
 					<td>${ board.date }</td>
 					<td></td>

@@ -11,7 +11,7 @@
 	String content = request.getParameter("contents");
 	String writer = (String) session.getAttribute("id");
 	Timestamp time = new Timestamp(System.currentTimeMillis());
-	BoardDAO dao = new BoardDAO();
+	BoardDAO dao = BoardDAO.getInstance();
 	if (session.getAttribute("id") != null) {
 		dao.writing(new Board(title, content, writer, time));
 		pw.println("<script>");
