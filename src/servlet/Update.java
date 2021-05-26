@@ -16,22 +16,43 @@ import board.BoardDAO;
 public class Update extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html; charset=UTF-8");
 		HttpSession session = request.getSession(true);
+		int idx = Integer.valueOf(request.getParameter("idx"));
+		PrintWriter out = response.getWriter();
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		String writer = request.getParameter("writer");
+		String id = (String) session.getAttribute("id");
+	 	if (session.getAttribute("id") == null) {
+			out.println("<script>");
+			out.println("alert('로그인 해주세요.')");
+			out.println("location.href = 'login.jsp'");
+			out.println("</script>");
+		} else if (!id.equals(writer)) {
+			out.println("<script>");
+			out.println("alert('작성자가 아닙니다.')");
+			out.println("history.back()");
+			out.println("</script>");
+		} else {
+			request.setAttribute("title", title);
+			request.setAttribute("content", content);
+			request.setAttribute("idx", idx);
+			request.getRequestDispatcher("/update.jsp").forward(request, response);
+		}
+	}
+
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html; charset=UTF-8");
 		int idx = Integer.valueOf(request.getParameter("idx"));
 		System.out.println(idx);
 		PrintWriter out = response.getWriter();
 		String title = request.getParameter("title");
 		String contents = request.getParameter("contents");
 		BoardDAO dao = BoardDAO.getInstance();
-		String id = (String) session.getAttribute("id");
-		if (session.getAttribute("id") == null) {
-			out.println("<script>");
-			out.println("alert('로그인 해주세요.')");
-			out.println("location.href = 'login.jsp';");
-			out.println("</script>");
-		} else if (title.length() == 0 || contents.length() == 0) {
+		if (title.length() == 0 || contents.length() == 0) {
 			out.println("<script>");
 			out.println("alert('제목 또는 내용을 입력해주세요')");
 			out.println("history.back()");
@@ -40,12 +61,11 @@ public class Update extends HttpServlet {
 			dao.update(title, contents, idx);
 			out.println("<script>");
 			out.println("alert('수정되었습니다.')");
-			out.println("location.href ='BorderServlet?idx='" + idx);
+			out.println("location.href ='BorderServlet?idx=" + idx +"'");
 			out.println("</script>");
 		}
-		request.setAttribute("title", title);
-		request.setAttribute("contnets", contents);
-		request.setAttribute("idx", idx);
-		request.getRequestDispatcher("/view.jsp").forward(request, response);
+		out.flush();
+	
 	}
+
 }

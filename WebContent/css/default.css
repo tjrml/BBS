@@ -51,7 +51,6 @@ input[type=search][disabled],
 input[type=email][disabled]{background:#eaeaea; border-color:#c0c0c0; color:#666; -webkit-appearance:none;font-size:12px;}
 textarea[readonly],
 textarea[disabled]{padding:11px; font-size:16px; color:#666; font-weight:normal; line-height:140%; height:78px; background:#eaeaea;border:1px solid #c0c0c0;}
-
 .clear {clear:both;}
 .clear:after { content:""; display:block; clear:both;}
 
@@ -78,9 +77,12 @@ form > p {margin:5px 0;}
 
 /* 회원가입 */
 #pw_confirm {font-size:.7rem;margin-left:30px;line-height:8px;}
+#search {position:absolute;z-index:2}
 .join_title {text-align:center;color:#000;padding-top:80px;font-size:1.4rem;}
-.joinbtn {margin-top:30px;width:148px;height:40px;border-radius:5px;color:#fff;background:#489CFF}
+.formbox {position:relative}
+.joinbtn {margin-top:30px;width:148px;height:40px;border-radius:5px;color:#fff;background:#489CFF;cursor:pointer}
 .joinbtn:last-child{background:#FF2424}
+.postSearch {width:81px;height:36px;position:absolute;right:-5.5rem;bottom:9rem;border-radius:5px;cursor:pointer;}
 
 /* 게시판 */
 .border_container {width:88%;height:100vh;margin:0 auto;position:relative}
