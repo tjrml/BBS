@@ -27,10 +27,12 @@ public class Join extends HttpServlet {
 		String pwconfirm = request.getParameter("pwconfirm");
 		String name = request.getParameter("name");
 		int age = Integer.valueOf(request.getParameter("age"));
+		String address = request.getParameter("address");
+		String detailed_Address = request.getParameter("detailed_Address");
 		MemberDAO dao = new MemberDAO();
 		if (password.contentEquals(pwconfirm)) {
 			try {
-				dao.join(new User(id, password, name, age));
+				dao.join(new User(id, password, name, age, address, detailed_Address));
 				out.println("<script>");
 				out.println("alert('가입완료')");
 				out.println("location.href = 'login.jsp'");

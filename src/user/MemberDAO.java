@@ -20,13 +20,15 @@ public class MemberDAO {
 	// 회원가입
 	public int join(User user) throws SQLException {
 		int result = 0;
-		String query = "INSERT INTO user(id, password, name, age)" + "VALUE(?, ?, ?, ?)";
+		String query = "INSERT INTO user(id, password, name, age, address, detailed_Address)" + "VALUE(?, ?, ?, ?, ?, ?)";
 		try (Connection conn = getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(query)) {
 			pstmt.setString(1, user.getId());
 			pstmt.setString(2, user.getPassword());
 			pstmt.setString(3, user.getName());
 			pstmt.setInt(4, user.getAge());
+			pstmt.setString(5, user.getAddress());
+			pstmt.setString(6, user.getDetailed_Address());
 			result = pstmt.executeUpdate();
 		}
 		return result;
