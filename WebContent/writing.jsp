@@ -12,7 +12,7 @@
 <jsp:include page="head.jsp" flush="false" />
 <div class="writing_container">
 	<div class="border_box writing_box">
-		<form action="BorderServlet" method="post">
+		<form action="/Writing" method="post">
 			<div class="title_box">
 				<input type="text" name="title" placeholder="제목">
 			</div>
@@ -21,7 +21,7 @@
 			</div>
 			<input type="submit" value="작성" class="btn" style="right:12%">
 		</form>
-		<div class="btn" onclick="location.href='/index.jsp'">취소</div>
+		<div class="btn" onclick="location.href='/BBS'">취소</div>
 	</div>
 </div>
 <jsp:include page="footer.jsp" flush="false" />
