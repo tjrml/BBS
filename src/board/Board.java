@@ -9,15 +9,14 @@ public class Board {
 	private String writer;
 	private Timestamp time;
 	private String date;
+	private int hit;
 
-	public Board() {
-	}
-
-	public Board(int idx, String title, String writer, String date) {
+	public Board(int idx, String title, String writer, String date, int hit) {
 		this.idx = idx;
 		this.title = title;
 		this.writer = writer;
 		this.date = date;
+		this.hit = hit;
 
 	}
 
@@ -26,6 +25,7 @@ public class Board {
 		this.content = content;
 		this.writer = writer;
 		this.time = time;
+		
 	}
 
 	public int getIdx() {
@@ -76,10 +76,18 @@ public class Board {
 		this.date = date;
 	}
 
+	public int getHit() {
+		return hit;
+	}
+
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
+
 	@Override
 	public String toString() {
-		return "Border [idx=" + idx + ", title=" + title + ", content=" + content + ", writer=" + writer + ", time="
-				+ time + "]";
+		return "Board [idx=" + idx + ", title=" + title + ", content=" + content + ", writer=" + writer + ", time="
+				+ time + ", date=" + date + ", hit=" + hit + "]";
 	}
 
 	@Override
@@ -87,6 +95,8 @@ public class Board {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		result = prime * result + hit;
 		result = prime * result + idx;
 		result = prime * result + ((time == null) ? 0 : time.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
@@ -107,6 +117,13 @@ public class Board {
 			if (other.content != null)
 				return false;
 		} else if (!content.equals(other.content))
+			return false;
+		if (date == null) {
+			if (other.date != null)
+				return false;
+		} else if (!date.equals(other.date))
+			return false;
+		if (hit != other.hit)
 			return false;
 		if (idx != other.idx)
 			return false;

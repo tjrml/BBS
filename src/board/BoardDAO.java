@@ -12,10 +12,14 @@ import java.util.List;
 
 public class BoardDAO {
 	private static BoardDAO instance = new BoardDAO();
-	private BoardDAO() {}
+
+	private BoardDAO() {
+	}
+
 	public static BoardDAO getInstance() {
 		return instance;
 	}
+
 	// DB연결
 	public Connection getConnection() throws SQLException {
 		try {
@@ -30,8 +34,7 @@ public class BoardDAO {
 	public int writing(Board border) throws SQLException {
 		int result = -1;
 		String query = "INSERT INTO border(title, writer, contents, date)" + "VALUE (?, ?, ?, ?)";
-		try (Connection conn = getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(query);) {
+		try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(query);) {
 			pstmt.setString(1, border.getTitle());
 			pstmt.setString(2, border.getWriter());
 			pstmt.setString(3, border.getContent());
@@ -41,12 +44,10 @@ public class BoardDAO {
 		return result;
 	}
 
-
 	// 삭제
 	public int delete(int idx) {
 		String query = "DELETE FROM border WHERE idx = ?";
-		try (Connection conn = getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(query);) {
+		try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(query);) {
 			pstmt.setInt(1, idx);
 			int result = pstmt.executeUpdate();
 			return result;
@@ -59,8 +60,7 @@ public class BoardDAO {
 	// 수정
 	public int update(String title, String contents, int idx) {
 		String query = "UPDATE border SET title = ?, contents = ? WHERE idx = ?";
-		try (Connection conn = getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(query);) {
+		try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(query);) {
 			pstmt.setString(1, title);
 			pstmt.setString(2, contents);
 			pstmt.setInt(3, idx);
@@ -75,8 +75,7 @@ public class BoardDAO {
 	// 1개만 검색
 	public Board seleteOne(int idx) throws SQLException {
 		String query = "SELECT * FROM border WHERE idx = ?";
-		try (Connection conn = getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(query);) {
+		try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(query);) {
 			pstmt.setInt(1, idx);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -94,8 +93,7 @@ public class BoardDAO {
 	public int totalCount() throws SQLException {
 		int count = 0;
 		String query = "SELECT COUNT(*) FROM border";
-		try (Connection conn = getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(query);) {
+		try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(query);) {
 			try (ResultSet rs = pstmt.executeQuery()) {
 				while (rs.next()) {
 					count = rs.getInt(1);
@@ -105,14 +103,12 @@ public class BoardDAO {
 		}
 		return -1;
 	}
-	
 
-	// 게시판 화면 출력 
+	// 게시판 화면 출력
 	public List<Board> boardPrint(int index, int numPerPage) throws SQLException {
 		List<Board> list = new ArrayList<Board>();
 		String query = "SELECT * FROM border ORDER BY idx DESC LIMIT ?, ?";
-		try (Connection conn = getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(query);) {
+		try (Connection conn = getConnection(); PreparedStatement pstmt = conn.prepareStatement(query);) {
 			pstmt.setInt(1, index);
 			pstmt.setInt(2, numPerPage);
 			ResultSet rs = pstmt.executeQuery();
@@ -122,10 +118,26 @@ public class BoardDAO {
 				String writer = rs.getString("writer");
 				Timestamp time = rs.getTimestamp("date");
 				String date = time.toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-				list.add(new Board(idx, title, writer, date));
+				int hit = rs.getInt("hit");
+				list.add(new Board(idx, title, writer, date, hit));
 			}
 			return list;
 		}
+	}
+
+	// 조회수 증가
+	public int hitUP(int idx, int hit) {
+		String query = "UPDATE border SET hit = ? WHERE idx = ?";
+		try (Connection conn = getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(query);) {
+			pstmt.setInt(1, hit);
+			pstmt.setInt(2, idx);
+			int result = pstmt.executeUpdate();
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return -1;
 	}
 
 }

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,24 +15,9 @@ import javax.servlet.http.HttpSession;
 import board.Board;
 import board.BoardDAO;
 
-@WebServlet("/BorderServlet")
-public class BorderServlet extends HttpServlet {
+@WebServlet("/Writing")
+public class Writing extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		int idx = Integer.valueOf(request.getParameter("idx"));
-		BoardDAO dao = BoardDAO.getInstance();
-		try {
-			Board board = dao.seleteOne(idx);
-			request.setAttribute("board", board);
-			request.setAttribute("idx", idx);
-			request.getRequestDispatcher("/view.jsp").forward(request, response);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -57,13 +41,12 @@ public class BorderServlet extends HttpServlet {
 			try {
 				dao.writing(new Board(title, content, writer, time));
 				out.println("<script>");
-				out.println("location.href = '/BBS';");
+				out.println("location.href ='/BBS'");
 				out.println("</script>");
 				out.flush();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-
 	}
 }

@@ -36,11 +36,11 @@
 				<tr>
 					<td>${ board.idx }</td>
 					<!-- 수정 삭제할때 쓸 idx, writer를 get으로 넘겨준다 -->
-					<td	onclick="location.href='BorderServlet?idx=${ board.idx }&write=${ board.writer }'">${ board.title }</td>
+					<td	onclick="location.href='View?idx=${ board.idx }&write=${ board.writer }&hit=${ board.hit }'">${ board.title }</td>
 					<td>${ board.writer }</td>
 					<!-- timestamp 패턴포맷 -->
 					<td>${ board.date }</td>
-					<td></td>
+					<td>${ board.hit }</td>
 				</tr>
 			</c:forEach>
 		</table>

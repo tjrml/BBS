@@ -21,18 +21,4 @@
 		</ul>
 		<div class="clear"></div>
 	</div>
-<script>
-	/* 메뉴 hover */
-	$(".menu").hover(function(){
-		$(this).addClass(".menu");
-	}, function(){
-		$(this).removeClass(".menu");
-	});
-	/*  로그인 회원가입 hover */
-	$(".login_singup").hover(function(){
-		$(this).addClass(".login_singup");
-	}, function(){
-		$(this).removeClass(".login_singup");
-	});
-</script>
 <jsp:include page="footer.jsp" flush="false" />

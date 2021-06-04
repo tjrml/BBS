@@ -61,7 +61,7 @@ public class Update extends HttpServlet {
 			dao.update(title, contents, idx);
 			out.println("<script>");
 			out.println("alert('수정되었습니다.')");
-			out.println("location.href ='BorderServlet?idx=" + idx +"'");
+			out.println("location.href ='/View?idx=" + idx +"'");
 			out.println("</script>");
 		}
 		out.flush();
