@@ -85,6 +85,7 @@
 					<option value="writer" <c:if test="${ selectbox eq 'writer'}"></c:if>>작성자</option>
 				</select>
 				<input type="text" name="search_content" value="${ value }" class="search_content" required/>
+				<input type="hidden" name="page" value="${ paramPage }" />
 				<input type="submit" value="검색" class="bbs_search" />
 			</form>
 		</div>
