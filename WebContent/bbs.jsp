@@ -78,6 +78,16 @@
 		</div>
 		<div class="btn" onclick="location.href='writing.jsp'">글쓰기</div>
 		<div class="clear"></div>
+		<div class="searchbox">
+			<form action="/BBS" method="get">
+				<select name="selectbox">
+					<option value="title" <c:if test="${ selectbox eq 'title'}"></c:if>>제목</option>
+					<option value="writer" <c:if test="${ selectbox eq 'writer'}"></c:if>>작성자</option>
+				</select>
+				<input type="text" name="search_content" value="${ value }" class="search_content" required/>
+				<input type="submit" value="검색" class="bbs_search" />
+			</form>
+		</div>
 	</div>
 </div>
 <jsp:include page="footer.jsp" flush="false" />
