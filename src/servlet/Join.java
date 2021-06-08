@@ -30,7 +30,7 @@ public class Join extends HttpServlet {
 		String address = request.getParameter("address");
 		String detailed_Address = request.getParameter("detailed_Address");
 		MemberDAO dao = new MemberDAO();
-		if (password.contentEquals(pwconfirm)) {
+		if (password.equals(pwconfirm)) {
 			try {
 				dao.join(new User(id, password, name, age, address, detailed_Address));
 				out.println("<script>");

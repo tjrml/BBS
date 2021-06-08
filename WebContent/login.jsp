@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <jsp:include page="head.jsp" flush="false"/>
 <title>로그인</title>
+<jsp:include page="gnb.jsp" flush="false" />
 <% 
 	if(session.getAttribute("id") != null) {
 		response.sendRedirect("index.jsp");

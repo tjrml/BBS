@@ -14,7 +14,7 @@
 		</div>
 		<ul>
 			<li class="menu" onclick="location.href='index.jsp'">HOME</li>
-			<li class="menu">ABOUT ME</li>
+			<li class="menu" onclick="location.href='profile.jsp'">ABOUT ME</li>
 			<li class="menu">RESUME</li>
 			<li class="menu">PORTFOLIO</li>
 			<li class="menu" onclick="location.href='BBS'">BOARD</li>
