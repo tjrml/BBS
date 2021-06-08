@@ -146,11 +146,27 @@ public class BoardDAO {
 		return -1;
 	}
 	
+	// 검색 총 갯수
+		public int searchCount(String key, String value) throws SQLException {
+			int count = 0;
+			String query = "SELECT COUNT(*) FROM border WHERE " + key + " LIKE ?";
+			try (Connection conn = getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query);) {
+				pstmt.setString(1, "%"+value+"%");
+				ResultSet rs = pstmt.executeQuery(); 
+					while (rs.next()) {
+					count = rs.getInt(1);
+					System.out.println(count);
+					return count;
+				}
+				return -1;
+			}
+		}
 	
 	// 검색
 	public List<Board> search(String key, String value, int index, int numPerPage) throws SQLException {
 		List<Board> list = new ArrayList<Board>();
-		String query = "SELECT * FROM border WHERE " + key + " LIKE ? LIMIT ?, ?";
+		String query = "SELECT * FROM border WHERE " + key + " LIKE ? ORDER BY idx DESC LIMIT ?, ?";
 		try (Connection conn = getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(query);) {
 			pstmt.setString(1, "%" + value + "%");
@@ -169,6 +185,7 @@ public class BoardDAO {
 			return list;
 		}
 	}
+	
 }
 
 
