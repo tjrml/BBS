@@ -47,7 +47,7 @@
 		<div class="page_box">
 			<c:choose>
 				<c:when test="${ startPage > 10 }">
-					<div class=page	onclick="location.href='BBS?page=${ startPage - 10}'">이전</div>
+					<div class=page	onclick="location.href='BBS?selectbox=${ key }&search_content=${ value }&page=${ startPage - 10}'">이전</div>
 				</c:when>
 				<c:otherwise>
 					<div class=page style="cursor:default;">이전</div>
@@ -57,19 +57,19 @@
 				<c:choose>
 					<c:when test="${ paramPage == page }">
 						<div class=page
-							onclick="location.href='BBS?page=${ page }'"
+							onclick="location.href='BBS?selectbox=${ key }&search_content=${ value }&page=${ page }'"
 							style="color: red">[${ page }]</div>
 					</c:when>
 					<c:otherwise>
 						<div class=page
-							onclick="location.href='BBS?page=${ page }'">[${ page }]</div>
+							onclick="location.href='BBS?selectbox=${ key }&search_content=${ value }&page=${ page }'">[${ page }]</div>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 			<c:choose>
 				<c:when test="${ endPage < totalPage }">
 					<div class=page
-						onclick="location.href='BBS?page=${ endPage + 1 }'">다음</div>
+						onclick="location.href='BBS?selectbox=${ key }&search_content=${ value }&page==${ endPage + 1 }'">다음</div>
 				</c:when>
 				<c:otherwise>
 					<div class=page style="cursor: default;">다음</div>

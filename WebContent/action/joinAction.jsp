@@ -16,7 +16,7 @@
 	String name = request.getParameter("name");
 	int age = Integer.valueOf(request.getParameter("age"));
 		MemberDAO dao = new MemberDAO();
-		dao.join(new User(id, password, name, age));
+		//dao.join(new User(id, password, name, age));
 %>
 <script>
 	alert("가입완료")

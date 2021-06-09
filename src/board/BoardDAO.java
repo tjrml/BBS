@@ -12,7 +12,6 @@ import java.util.List;
 
 public class BoardDAO {
 	private static BoardDAO instance = new BoardDAO();
-
 	private BoardDAO() {
 	}
 
@@ -146,25 +145,24 @@ public class BoardDAO {
 		return -1;
 	}
 	
-	// 검색 총 갯수
-		public int searchCount(String key, String value) throws SQLException {
+	// 제목 총 갯수
+		public int titleCount(String key, String value) throws SQLException {
 			int count = 0;
 			String query = "SELECT COUNT(*) FROM border WHERE " + key + " LIKE ?";
 			try (Connection conn = getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query);) {
-				pstmt.setString(1, "%"+value+"%");
+				pstmt.setString(1, "%" + value + "%");
 				ResultSet rs = pstmt.executeQuery(); 
 					while (rs.next()) {
 					count = rs.getInt(1);
-					System.out.println(count);
 					return count;
 				}
 				return -1;
 			}
 		}
 	
-	// 검색
-	public List<Board> search(String key, String value, int index, int numPerPage) throws SQLException {
+	// 제목 검색
+	public List<Board> titleSearch(String key, String value, int index, int numPerPage) throws SQLException {
 		List<Board> list = new ArrayList<Board>();
 		String query = "SELECT * FROM border WHERE " + key + " LIKE ? ORDER BY idx DESC LIMIT ?, ?";
 		try (Connection conn = getConnection();
@@ -186,6 +184,44 @@ public class BoardDAO {
 		}
 	}
 	
+	// 작성자 총 갯수
+	public int writerCount(String key, String value) throws SQLException {
+		int count = 0;
+		String query = "SELECT COUNT(*) FROM border WHERE " + key + " = ?";
+		try (Connection conn = getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(query);) {
+			pstmt.setString(1, value);
+			ResultSet rs = pstmt.executeQuery(); 
+				while (rs.next()) {
+				count = rs.getInt(1);
+				return count;
+			}
+			return -1;
+		}
+	}
+	
+	// 작성자 검색
+	public List<Board> writerSearch(String key, String value, int index, int numPerPage) throws SQLException {
+		List<Board> list = new ArrayList<Board>();
+		String query = "SELECT * FROM border WHERE " + key + " = ? ORDER BY idx DESC LIMIT ?, ?";
+		try (Connection conn = getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(query);) {
+			pstmt.setString(1, value);
+			pstmt.setInt(2, index);
+			pstmt.setInt(3, numPerPage);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				int idx = rs.getInt("idx");
+				String title = rs.getString("title");
+				String writer = rs.getString("writer");
+				Timestamp time = rs.getTimestamp("date");
+				String date = time.toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+				int hit = rs.getInt("hit");
+				list.add(new Board(idx, title, writer, date, hit));
+			}
+			return list;
+		}
+	}
 }
 
 
