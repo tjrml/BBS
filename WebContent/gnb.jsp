@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <jsp:include page="head.jsp" flush="false" />
 <div class="gnb">
-		<div class="loginbox">
+		<div class="box">
 			<% if (session.getAttribute("id") != null) {%>
 				<span class="login_singup" onclick="location.href='logout.jsp'"><i class="fas fa-sign-out-alt"></i>로그아웃</span>
 			<% } else { %>

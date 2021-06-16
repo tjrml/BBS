@@ -56,7 +56,7 @@ textarea[disabled]{padding:11px; font-size:16px; color:#666; font-weight:normal;
 
 /* gnb */
 .gnb {width:100%;background:#1c1c26;height:65px;position:absolute;top:0;font-size:12px;color:#fff;margin:0 auto;z-index:9999}
-.loginbox {position:absolute;top:15px;left:17px;color:#9b9b9f;}
+.box {position:absolute;top:15px;left:17px;color:#9b9b9f;}
 .login_singup {padding:0 3px;cursor:pointer;}
 .gnb ul {float:right;font-weight:bold}
 .gnb li{float:left;width:auto;line-height:65px;margin:0 14px;cursor:pointer;}
@@ -71,20 +71,21 @@ textarea[disabled]{padding:11px; font-size:16px; color:#666; font-weight:normal;
 /* 로그인 */
 .login_title {text-align:center;font-size:2rem;margin-top:200px}
 .formbox {width:300px;margin:0 auto;font-size:.8rem;padding-top:3rem}
-.loginbtn {width:300px;height:42px;color:#fff;background:#000;font-size:.8rem;border-radius:5px;cursor:pointer;}
-.formbox span {float:right;padding:5px 0;cursor:pointer;}
+.loginbtn {width:300px;height:42px;color:#fff;background:#000;font-size:.8rem;border-radius:5px;margin-top:2rem;cursor:pointer;}
+.loginbox span {float:right;padding:5px 0;cursor:pointer;}
 form > p {margin:5px 0;}
 
 /* 회원가입 */
-#pw_confirm {font-size:.7rem;margin-left:30px;line-height:8px;}
+#pw_confirm {font-size:.7rem;margin-left:30px;line-height:18px;}
 #search {position:absolute;top:55px;left:-18px;z-index:9999;}
-/* #search {position:absolute;z-index:2;bottom:66px} */
 #btnCloseLayer {cursor:pointer;position:absolute;right:0;top:0;z-index:100}
 .join_title {text-align:center;color:#000;padding-top:80px;font-size:1.4rem;}
-.formbox {position:relative}
+.joinbox {position:relative}
+.joinbox span {float:right;line-height:18px;font-size:.7rem}
+.idcheck {width:75px;height:36px;position:absolute;top:79px;right:-82px;border-radius:5px;text-align:center;font-size:.7rem;line-height:36px;background:#000;color:#fff;cursor:pointer;}
 .joinbtn {margin-top:30px;width:148px;height:40px;border-radius:5px;color:#fff;background:#489CFF;cursor:pointer}
 .joinbtn:last-child{background:#FF2424}
-.postSearch {width:81px;height:36px;position:absolute;right:-5.5rem;bottom:9rem;border-radius:5px;cursor:pointer;}
+.postSearch {width:75px;height:36px;position:absolute;right:-82px;bottom:9rem;border-radius:5px;background:#000;color:#fff;font-size:.7rem;cursor:pointer;}
 
 /* 게시판 */
 .border_container {width:88%;height:100vh;margin:0 auto;position:relative}

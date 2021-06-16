@@ -17,6 +17,26 @@ import user.User;
 public class Join extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html; charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
+		String id = request.getParameter("id");
+		MemberDAO dao = new MemberDAO();
+		PrintWriter out = response.getWriter();
+		try {
+			int check = dao.idcheck(id);
+			System.out.println(check);
+			out.println(check);
+			out.flush();
+//			request.setAttribute("check", check);
+//			request.getRequestDispatcher("/join.jsp").forward(request, response);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html; charset=UTF-8");
@@ -30,6 +50,13 @@ public class Join extends HttpServlet {
 		String address = request.getParameter("address");
 		String detailed_Address = request.getParameter("detailed_Address");
 		MemberDAO dao = new MemberDAO();
+		if(id.equals(id)){
+			out.println("<script>");
+			out.println("alert('중복된 아이디입니다.')");
+			out.println("history.back()");
+			out.println("</script>");
+		}
+		
 		if (password.equals(pwconfirm)) {
 			try {
 				dao.join(new User(id, password, name, age, address, detailed_Address));
