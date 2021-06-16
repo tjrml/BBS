@@ -28,4 +28,14 @@
 		});
 	});
 	
+	//selected
+	$("#selectbox").each(function() {
+		var key = $(this).attr("rel");
+		$(this).find("option[value="+ key +"]").attr("selected", true);
+	});
+	
+	
+
+	
+	
 	

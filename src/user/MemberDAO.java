@@ -50,4 +50,18 @@ public class MemberDAO {
 		}
 		return result;
 	}
+	
+	// id체크
+	public int idcheck(String id) throws SQLException {
+		String query = "SELECT * FROM user WHERE id = ?";
+		try (Connection conn = getConnection(); 
+			PreparedStatement pstmt = conn.prepareStatement(query);) {
+			pstmt.setString(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				return 1;
+			};
+		}
+		return -1;
+	}
 }

@@ -12,10 +12,13 @@
 	<div class="join_title">
 		<h1>회원가입</h1>
 	</div>
-	<div class="formbox">
+	<div class="formbox joinbox">
 		<form action="Join" method="post">
-			<p>아이디</p>
-			<input type="text" name="id" required>
+			<p>아이디
+				<span class="confirm_text"></span>
+			</p>
+			<div class="idcheck">중복확인</div>
+			<input type="text" id="id" name="id" required>
 			<p>비밀번호</p>
 			<input type="password" name="password" id="password" required>
 			<p>비밀번호 확인 <span id="pw_confirm"></span></p>
@@ -38,8 +41,34 @@
 			<input type="button" value="취소" class="joinbtn" onclick="location.href='login.jsp'">
 		</form>
 	</div>
+	
 </div>
 <script type="text/javascript">
+//아이디 중복확인
+$(".idcheck").click(function() {
+	var id = $(".joinbox [name='id']").val();
+	// var check = response;
+	$.ajax({
+		type : 'get',
+		url : '/Join?id=' + id,
+		dataType : 'text',
+		success : function(response) {
+			if (id.length < 1 || id == null) {
+	 			$(".confirm_text").html("아이디를 입력하세요.");
+	 			$(".confirm_text").css("color", "red");
+			} else if(response == 1) {
+	 			$(".confirm_text").html("중복된 아이디입니다.");
+	 			$(".confirm_text").css("color", "red");
+	 		} else {
+	 			$(".confirm_text").html("사용가능한 아이디입니다.");
+	 			$(".confirm_text").css("color", "blue");
+	 		}
+			console.log(response);
+			console.log(id);
+		}
+	}) 
+});
+	
 //카카오 주소
 // 우편번호 찾기 화면을 넣을 element
 	var element_layer = document.getElementById('search');

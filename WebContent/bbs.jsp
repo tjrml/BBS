@@ -38,7 +38,6 @@
 					<!-- 수정 삭제할때 쓸 idx, writer를 get으로 넘겨준다 -->
 					<td	onclick="location.href='View?idx=${ board.idx }&write=${ board.writer }&hit=${ board.hit }'">${ board.title }</td>
 					<td>${ board.writer }</td>
-					<!-- timestamp 패턴포맷 -->
 					<td>${ board.date }</td>
 					<td>${ board.hit }</td>
 				</tr>
@@ -80,15 +79,22 @@
 		<div class="clear"></div>
 		<div class="searchbox">
 			<form action="/BBS" method="get">
-				<select name="selectbox">
-					<option value="title" <c:if test="${ selectbox eq 'title'}"></c:if>>제목</option>
+				<select id="selectbox" name="selectbox" rel="${ key }">
+					<option value="title" <c:if test="${ selectbox eq 'title'}"></c:if> >제목</option>
 					<option value="writer" <c:if test="${ selectbox eq 'writer'}"></c:if>>작성자</option>
 				</select>
 				<input type="text" name="search_content" value="${ value }" class="search_content" required/>
-				<input type="hidden" name="page" value="${ paramPage }" />
+				<input type="hidden" name="page" value="1" />
 				<input type="submit" value="검색" class="bbs_search" />
 			</form>
 		</div>
 	</div>
 </div>
+<script>
+	//selected
+	$("#selectbox").each(function() {
+		var key = $(this).attr("rel");
+		$(this).find("option[value="+ key +"]").attr("selected", true);
+	}); 
+</script>
 <jsp:include page="footer.jsp" flush="false" />

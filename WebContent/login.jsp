@@ -12,13 +12,13 @@
 	<div class="login_title">
 		<h1>LOGIN</h1>
 	</div>
-	<div class="formbox">
+	<div class="formbox loginbox">
 		<form action="Login" method="post">
 			<p>아이디</p>
 			<input type="text" name="id" size="30"><br>
 			<p>비밀번호</p>
 			<input type="password" name="password" size="30"><br>
-			<span onclick="location.href='/join.jsp'">회원가입</span>
+			<!-- <span onclick="location.href='/join.jsp'">회원가입</span> -->
 			<div class="clear"></div>
 			<input class="loginbtn" type="submit" value="로그인">
 		</form>
